@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>what program should i do?</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+    
+    <div class="header">the ultimate tool to find out what program you should do!</div>
+    <div class="small">Cant decide what program to pick? Events that overlap? Not enough time </div>
+    <div id="form">
+        <!--names update questions with names!-->
+        <div class="ques">Enter the names of the programs</div><br>
+        <div class="small">program 1</div>
+        <input id="p1" type="text">
+        <div class="small">program 2</div>
+        <input id="p2" type="text">
+        <!--travel branch, DONT update since you can just - or + to if chosen or not but MUST update if no travel needed!-->
+        <div class="ques">do you need to travel for any of the programs?</div>
+        <select id="trvlneed"><!--update only this!-->
+            <option>yes</option>
+            <option>no</option>
+        </select>
+
+
+<!--want travel?!-->
+        <div class="ques travel">do you want to travel?</div>
+       <select class="travel" id="wanttrvl">
+        <option>yes</option>
+        <option>no</option>
+       </select>
+<!--programs need travel?!-->
+      <div class="small travel">select which programs need travel</div>
+      <input type="checkbox" id="t1" class="travel">
+      <label for="t1" id="t1label">(program1)</label><br>
+      <input type="checkbox" id="t2" class="travel">
+      <label for="t2" id="t2label">(program2)</label><br>
+<!--if both then which longer!-->
+    <div style="display:inline-flex"><div id="longerp1" class="travel small">(program1)</div><select><option>></option><option><</option></select><div id="longerp2">(program2)</div></div>
+      
+       
+
+
+
+
+
+
+
+
+
+
+
+
+       <br><br> <button>submit!</button>
+    </div>
+    <script>
+        function hide(hidedclass) {
+            document.querySelectorAll("."+hidedclass).forEach(el => el.classList.remove("show"));
+            document.querySelectorAll("."+hidedclass).forEach(el => el.classList.add("hide"))
+        }
+        function show(showedclass) {
+            document.querySelectorAll("."+showedclass).forEach(el=> el.classList.add("show"))
+            document.querySelectorAll("."+showedclass).forEach(el=> el.classList.remove("hide"))
+        }
+
+    </script>
+</body>
+</html>

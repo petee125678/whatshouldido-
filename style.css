@@ -1,0 +1,11 @@
+.hide {
+    display:none;
+    pointer-events:none
+}
+.show {
+    display:block;
+    pointer-events: all;
+}
+.small{font-size:1vw}
+.header{font-size:4vw}
+.ques{font-size:2vw}
