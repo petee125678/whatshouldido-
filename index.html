@@ -8,7 +8,7 @@
 
     
     <div class="header">the ultimate tool to find out what program you should do!</div>
-    <div class="small">Cant decide what program to pick? Events that overlap? Not enough time </div>
+    <div class="small">Cant decide what program to pick? Events that overlap? Not enough time? Use this! </div>
     <div id="form">
         <!--names update questions with names!-->
         <div class="ques">Enter the names of the programs</div><br>
@@ -29,6 +29,7 @@
        <select class="travel" id="wanttrvl">
         <option>yes</option>
         <option>no</option>
+        <option>unsure</option>
        </select>
 <!--programs need travel?!-->
       <div class="small travel">select which programs need travel</div>
@@ -37,9 +38,21 @@
       <input type="checkbox" id="t2" class="travel">
       <label for="t2" id="t2label">(program2)</label><br>
 <!--if both then which longer!-->
-    <div style="display:inline-flex"><div id="longerp1" class="travel small">(program1)</div><select><option>></option><option><</option></select><div id="longerp2">(program2)</div></div>
-      
-       
+    <div class="if-bfli ques travel">which flight is longer?</div> <!--add hide when ready-->
+    <!-- if like travel, add +1 to longest, if NOT like travel then -1!--><div style="display:inline-flex"><div id="longerp1" class="travel small">(program1)</div><select class="travel"><option>></option><option><</option></select><div id="longerp2" class="travel small">(program2)</div></div>
+    <!--if only one then if like travel, +1. If NOT like travel then -1-->
+<!--friends at event?-->
+    <div class="ques">Do you have any friends in the program?</div>
+    <select class="fq1">
+        <option>yes</option>
+        <option>no</option>
+        <option>i dont like them</option>
+    </select><!--show or dont show friend questions-->
+    <div class="friends ques">which one(s)?</div>
+    <input type="checkbox" id="f1"> 
+    <label for="f1">(program1)</label>
+    <input type="checkbox" id="f2">
+    <label for="f2">(program2)</label>
 
 
 
@@ -51,7 +64,7 @@
 
 
 
-
+<!--add if you like people-->
        <br><br> <button>submit!</button>
     </div>
     <script>

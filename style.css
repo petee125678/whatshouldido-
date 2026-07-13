@@ -6,6 +6,23 @@
     display:block;
     pointer-events: all;
 }
-.small{font-size:1vw}
-.header{font-size:4vw}
-.ques{font-size:2vw}
+.small{font-size:2vw}
+.header{font-size:5vw}
+.ques{font-size:3vw}
+
+input:not([type="checkbox"]){
+    width:10vw;
+    height:2vw;
+    font-size:2vw
+}
+input[type="checkbox"] {
+    width:2vw;
+    height:2vw;
+}
+select{
+    width:fit-content;
+    font-size:2vw
+}
+label{
+    font-size:2vw
+}
