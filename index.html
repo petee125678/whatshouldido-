@@ -60,9 +60,10 @@
     <label for="f2" class="friends">(program2)</label>
 <!--give kudos to events-->
     <div class="ques">give out 100 kudos to both events! more kudos=you like it</div>
-    <br><label for="r1">0</label><input type="range" id="r1"min="0" max="100"><label for="r1">100</label>
-    <label for="r1" id="r1l">(program1)</label>
-
+    <br><label for="r1">0</label><input type="range" id="r1"min="0" max="100"><label for="r1">100</label><div class="small" id="r1value">??</div>
+    <label for="r1" id="r1label">(program1)</label>
+    <br><label for="r2">0</label><input type="range" id="r2" min="0" max="100"><label for="r2">100</label><div class="small" id="r2value">??</div>
+    <label for="r2" id="r2label">(program2)</label>
 
 
 
@@ -76,6 +77,13 @@
        <br><br> <button>submit!</button>
     </div>
     <script>
+        let range1 = 0
+        let range2 = 0
+        let changing=0
+        let pastr1 =0
+        let pastr2 =0
+        let newr1 =0
+        let newr2 =0
         function hide(hidedclass) {
             document.querySelectorAll("."+hidedclass).forEach(el => el.classList.remove("show"));
             document.querySelectorAll("."+hidedclass).forEach(el => el.classList.add("hide"))
@@ -90,7 +98,38 @@
         setInterval(() =>{
             if(document.getElementById("trvlneed").value === "no") {hide("travel")}
             if(document.getElementById("fq1").value === "no") {hide("friends")}
+            documen
         },250)
+
+
+  setInterval(() =>{
+            range1 = Number(document.getElementById("r1").value)
+            range2 = Number(document.getElementById("r2").value)
+            if (pastr1!=range1) {changing=1} else if (pastr2!=range2) {changing=2} else {changing=0}
+              if (range1+range2>100) {
+                difference = (range1+range2)-100
+               if (changing===1) {document.getElementById("r2").value = range2-difference} else if (changing===2) {document.getElementById("r1").value = range1-difference}
+            
+            } else if (range1+range2<100) {
+                difference = Math.abs((range1+range2)-100)
+               if (changing===1) {document.getElementById("r2").value = range2+difference} else if (changing===2) {document.getElementById("r1").value = range1+difference}
+            }
+
+
+               document.getElementById("r2value").textContent = range2
+               document.getElementById("r1value").textContent = range1
+                pastr1=range1
+                pastr2=range2
+
+
+
+
+
+
+        },25)
+
+
+      
     </script>
 </body>
 </html>
