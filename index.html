@@ -15,9 +15,12 @@
         <div class="small">program 1</div>
         <input id="p1" type="text">
         <div class="small">program 2</div>
-        <input id="p2" type="text">
+        <input id="p2" type="text"><br><br>
+        <button onclick="changenames()">change names</button>
+
+    
         <!--travel branch, DONT update since you can just - or + to if chosen or not but MUST update if no travel needed!-->
-        <div class="ques">do you need to travel for any of the programs?</div>
+        <div class="ques">do you need to travel on a plane for any of the programs?</div>
         <select id="trvlneed"><!--update only this!-->
             <option>yes</option>
             <option>no</option>
@@ -34,26 +37,31 @@
 <!--programs need travel?!-->
       <div class="small travel">select which programs need travel</div>
       <input type="checkbox" id="t1" class="travel">
-      <label for="t1" id="t1label">(program1)</label><br>
+      <label for="t1" id="t1label" class="travel">(program1)</label><br>
       <input type="checkbox" id="t2" class="travel">
-      <label for="t2" id="t2label">(program2)</label><br>
+      <label for="t2" id="t2label" class="travel">(program2)</label><br>
 <!--if both then which longer!-->
     <div class="if-bfli ques travel">which flight is longer?</div> <!--add hide when ready-->
     <!-- if like travel, add +1 to longest, if NOT like travel then -1!--><div style="display:inline-flex"><div id="longerp1" class="travel small">(program1)</div><select class="travel"><option>></option><option><</option></select><div id="longerp2" class="travel small">(program2)</div></div>
     <!--if only one then if like travel, +1. If NOT like travel then -1-->
 <!--friends at event?-->
     <div class="ques">Do you have any friends in the program?</div>
-    <select class="fq1">
+    <select id="fq1">
         <option>yes</option>
         <option>no</option>
         <option>i dont like them</option>
-    </select><!--show or dont show friend questions-->
-    <div class="friends ques">which one(s)?</div>
-    <input type="checkbox" id="f1"> 
-    <label for="f1">(program1)</label>
-    <input type="checkbox" id="f2">
-    <label for="f2">(program2)</label>
-
+    </select>
+<!--show or dont show friend questions-->
+<!--which prog friends?-->
+    <div class="friends ques">In which one(s)?</div>
+    <input type="checkbox" id="f1" class="friends"> 
+    <label for="f1" class="friends">(program1)</label>
+    <input type="checkbox" id="f2" class="friends">
+    <label for="f2" class="friends">(program2)</label>
+<!--give kudos to events-->
+    <div class="ques">give out 100 kudos to both events! more kudos=you like it</div>
+    <br><label for="r1">0</label><input type="range" id="r1"min="0" max="100"><label for="r1">100</label>
+    <label for="r1" id="r1l">(program1)</label>
 
 
 
@@ -76,7 +84,13 @@
             document.querySelectorAll("."+showedclass).forEach(el=> el.classList.add("show"))
             document.querySelectorAll("."+showedclass).forEach(el=> el.classList.remove("hide"))
         }
-
+        function changenames() {
+            //PUT CHANGE STUFF HERE
+        }
+        setInterval(() =>{
+            if(document.getElementById("trvlneed").value === "no") {hide("travel")}
+            if(document.getElementById("fq1").value === "no") {hide("friends")}
+        },250)
     </script>
 </body>
 </html>

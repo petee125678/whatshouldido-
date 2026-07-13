@@ -26,3 +26,9 @@ select{
 label{
     font-size:2vw
 }
+button{
+    font-size:2vw;
+    width:fit-content;
+    height:fit-content;
+    padding:0.5vw
+}
