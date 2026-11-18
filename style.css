@@ -6,6 +6,9 @@
     display:block;
     pointer-events: all;
 }
+.flight-options.show {
+    display:inline-flex;
+}
 .small{font-size:2vw}
 .header{font-size:5vw}
 .ques{font-size:3vw}
@@ -31,4 +34,13 @@ button{
     width:fit-content;
     height:fit-content;
     padding:0.5vw
+}
+@font-face {
+    font-family: 'cat';
+    src: url('cute-cat.otf') format('opentype');
+    font-weight: thin;
+    font-style: normal;
+}
+.cat {
+    font-family: 'cat';
 }

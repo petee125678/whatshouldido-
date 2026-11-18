@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
+    <div class="cat">
     <head>
         <title>what program should i do?</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
 
-    
+       
+       
     <div class="header">the ultimate tool to find out what program you should do!</div>
+    <a href="ugly.html"><i>why is this so so ugly?</i></a>
     <div class="small">Cant decide what program to pick? Events that overlap? Not enough time? Use this! </div>
     <div id="form">
         <!--names update questions with names!-->
@@ -41,8 +44,8 @@
       <input type="checkbox" id="t2" class="travel">
       <label for="t2" id="t2label" class="travel">(program2)</label><br>
 <!--if both then which longer!-->
-    <div class="if-bfli ques travel">which flight is longer?</div> <!--add hide when ready-->
-    <!-- if like travel, add +1 to longest, if NOT like travel then -1!--><div style="display:inline-flex"><div id="longerp1" class="travel small">(program1)</div><select class="travel"><option>></option><option><</option></select><div id="longerp2" class="travel small">(program2)</div></div>
+    <div class="if-bfli ques travel flight-details">which flight is longer?</div>
+    <div class="travel flight-details flight-options"><div id="longerp1" class="small">(program1)</div><select id="longerFlight"><option value=">">&gt;</option><option value="<">&lt;</option></select><div id="longerp2" class="small">(program2)</div></div>
     <!--if only one then if like travel, +1. If NOT like travel then -1-->
 <!--friends at event?-->
     <div class="ques">Do you have any friends in the program?</div>
@@ -74,62 +77,117 @@
 
 
 <!--add if you like people-->
-       <br><br> <button>submit!</button>
+       <br><br> <button id="submit" type="button">submit!</button>
+       <div id="result" class="ques" role="status"></div>
     </div>
     <script>
-        let range1 = 0
-        let range2 = 0
-        let changing=0
-        let pastr1 =0
-        let pastr2 =0
-        let newr1 =0
-        let newr2 =0
         function hide(hidedclass) {
-            document.querySelectorAll("."+hidedclass).forEach(el => el.classList.remove("show"));
-            document.querySelectorAll("."+hidedclass).forEach(el => el.classList.add("hide"))
+            document.querySelectorAll("." + hidedclass).forEach(el => {
+                el.classList.remove("show");
+                el.classList.add("hide");
+            });
         }
         function show(showedclass) {
-            document.querySelectorAll("."+showedclass).forEach(el=> el.classList.add("show"))
-            document.querySelectorAll("."+showedclass).forEach(el=> el.classList.remove("hide"))
+            document.querySelectorAll("." + showedclass).forEach(el => {
+                el.classList.add("show");
+                el.classList.remove("hide");
+            });
         }
         function changenames() {
-            //PUT CHANGE STUFF HERE
+            const name1 = document.getElementById("p1").value.trim() || "program 1";
+            const name2 = document.getElementById("p2").value.trim() || "program 2";
+            document.getElementById("t1label").textContent = name1;
+            document.getElementById("t2label").textContent = name2;
+            document.querySelector('label[for="f1"]').textContent = name1;
+            document.querySelector('label[for="f2"]').textContent = name2;
+            document.getElementById("r1label").textContent = name1;
+            document.getElementById("r2label").textContent = name2;
+            document.getElementById("longerp1").textContent = name1;
+            document.getElementById("longerp2").textContent = name2;
         }
-        setInterval(() =>{
-            if(document.getElementById("trvlneed").value === "no") {hide("travel")}
-            if(document.getElementById("fq1").value === "no") {hide("friends")}
-            documen
-        },250)
 
-
-  setInterval(() =>{
-            range1 = Number(document.getElementById("r1").value)
-            range2 = Number(document.getElementById("r2").value)
-            if (pastr1!=range1) {changing=1} else if (pastr2!=range2) {changing=2} else {changing=0}
-              if (range1+range2>100) {
-                difference = (range1+range2)-100
-               if (changing===1) {document.getElementById("r2").value = range2-difference} else if (changing===2) {document.getElementById("r1").value = range1-difference}
-            
-            } else if (range1+range2<100) {
-                difference = Math.abs((range1+range2)-100)
-               if (changing===1) {document.getElementById("r2").value = range2+difference} else if (changing===2) {document.getElementById("r1").value = range1+difference}
+        function updateVisibility() {
+            if (document.getElementById("trvlneed").value === "yes") {
+                show("travel");
+                if (document.getElementById("t1").checked && document.getElementById("t2").checked) {
+                    show("flight-details");
+                } else {
+                    hide("flight-details");
+                }
+            } else {
+                hide("travel");
             }
 
+            if (document.getElementById("fq1").value === "no") {
+                hide("friends");
+            } else {
+                show("friends");
+            }
+        }
 
-               document.getElementById("r2value").textContent = range2
-               document.getElementById("r1value").textContent = range1
-                pastr1=range1
-                pastr2=range2
+        function updateKudos(changedRange) {
+            const otherRange = changedRange === "r1" ? "r2" : "r1";
+            const changedValue = Number(document.getElementById(changedRange).value);
+            document.getElementById(otherRange).value = 100 - changedValue;
+            document.getElementById("r1value").textContent = document.getElementById("r1").value;
+            document.getElementById("r2value").textContent = document.getElementById("r2").value;
+        }
 
+        function calculateResult() {
+            const names = [
+                document.getElementById("p1").value.trim() || "program 1",
+                document.getElementById("p2").value.trim() || "program 2"
+            ];
+            const scores = [
+                Number(document.getElementById("r1").value),
+                Number(document.getElementById("r2").value)
+            ];
 
+            if (document.getElementById("trvlneed").value === "yes") {
+                const travelPreference = document.getElementById("wanttrvl").value;
+                const travelAdjustment = travelPreference === "yes" ? 1 : travelPreference === "no" ? -1 : 0;
+                const needsTravel = [
+                    document.getElementById("t1").checked,
+                    document.getElementById("t2").checked
+                ];
 
+                if (needsTravel[0] && needsTravel[1]) {
+                    scores[document.getElementById("longerFlight").value === ">" ? 0 : 1] += travelAdjustment;
+                } else if (needsTravel[0] || needsTravel[1]) {
+                    scores[needsTravel[0] ? 0 : 1] += travelAdjustment;
+                }
+            }
 
+            const friendPreference = document.getElementById("fq1").value;
+            if (friendPreference !== "no") {
+                const friendAdjustment = friendPreference === "yes" ? 1 : -1;
+                if (document.getElementById("f1").checked) scores[0] += friendAdjustment;
+                if (document.getElementById("f2").checked) scores[1] += friendAdjustment;
+            }
 
+            const result = document.getElementById("result");
+            if (scores[0] === scores[1]) scores[Math.random() < 0.5 ? 0 : 1] += 1;
+            const details = `${names[0]}: ${scores[0]} | ${names[1]}: ${scores[1]}`;
+            const winner = scores[0] > scores[1] ? names[0] : names[1];
+            result.textContent = `${winner} is the better choice! ${details}`;
+        }
 
-        },25)
+        document.getElementById("trvlneed").addEventListener("change", updateVisibility);
+        document.getElementById("fq1").addEventListener("change", updateVisibility);
+        document.getElementById("t1").addEventListener("change", updateVisibility);
+        document.getElementById("t2").addEventListener("change", updateVisibility);
+        document.getElementById("r1").addEventListener("input", () => updateKudos("r1"));
+        document.getElementById("r2").addEventListener("input", () => updateKudos("r2"));
+        document.getElementById("submit").addEventListener("click", calculateResult);
+        document.getElementById("p1").addEventListener("input", changenames);
+        document.getElementById("p2").addEventListener("input", changenames);
+        document.getElementById("r1value").textContent = document.getElementById("r1").value;
+        document.getElementById("r2value").textContent = document.getElementById("r2").value;
+        updateVisibility();
 
 
       
     </script>
+    </div>
 </body>
 </html>
